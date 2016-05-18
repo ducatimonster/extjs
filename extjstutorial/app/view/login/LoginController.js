@@ -9,15 +9,76 @@ Ext.define('App.view.login.LoginController', {
 
     onTextFieldKeyPress: function(field, e, options) {},
 
-    onButtonClickCancel: function(button, e, options) {},
+    onButtonClickCancel: function(button, e, options) {
+        // console.log('login cancel')
+        this.lookupReference('form').reset();
+    },
 
-    onButtonClickSubmit: function(button, e, options) {},
+    onButtonClickSubmit: function(button, e, options) {
+        // console.log('login submit')
+        var me = this;
+        if (me.lookupReference('form').isValid()) {
+            me.doLogin();
+        }
+    },
 
-    doLogin: function() {},
+    doLogin: function() {
+        var me = this;
+            form = me.lookupReference('form');
 
-    onLoginFailure: function(form, action) {},
+        form.submit ({
+            clientValidation: true,
+            url: 'php/security/login.php',
+            scope: me,
+            success: 'onLoginSuccess',
+            failure: 'onLoginFailure'
+        });
+    },
 
-    onLoginSuccess: function(form, action) {}
+    onLoginFailure: function(form, action) {
+        var result = Ext.JSON.decode(action.response.responseText, true);
+
+        if (!result) {
+            result = {};
+            result.success = false;
+            result.msg = action.response.responseText;
+        }
+
+        switch (action.failureType) {
+            case Ext.form.action.Action.CLIENT_INVALID:
+                Ext.Msg.show({
+                    title: 'Error!',
+                    msg: 'Form fields may not be submited with invalid values',
+                    icon: Ext.msg.ERROR,
+                    buttons: Ext.Msg.OK
+                });
+                break;
+
+            case Ext.form.action.Action.CONNECT_FAILURE:
+                Ext.msg.show({
+                    title: 'Error!',
+                    msg: 'Form fields may not be submitted with invalid values',
+                    icon: Ext.Msg.ERROR,
+                    buttons: Ext.Msg.OK
+                });
+                break;
+
+            case Ext.form.action.Action.SERVER_INVALID:  //#7
+                Ext.Msg.show({
+                    title:'Error!',
+                    msg: result.msg, //#8
+                    icon: Ext.Msg.ERROR,
+                    buttons: Ext.Msg.OK
+                });
+
+
+        }
+    },
+
+    onLoginSuccess: function(form, action) {
+        this.getView().close();
+        Ext.create('App.view.main.Main');
+    }
 
     /**
      * Called when the view is created

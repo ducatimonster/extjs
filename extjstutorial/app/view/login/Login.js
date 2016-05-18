@@ -6,10 +6,12 @@ Ext.define('App.view.login.Login', {
 
     requires: [
         // 'Packt.view.Login.login.LoginModel',
-        // 'App.view.login.LoginController',
+        'App.view.login.LoginController', // this let it know where to look for the controller alias 'login'
         'Ext.form.Panel'
     ],
 
+    controller: 'login', // using the alias of LoginController.js
+    
     /*
     Uncomment to give this component an xtype
     xtype: 'login',
@@ -30,6 +32,7 @@ Ext.define('App.view.login.Login', {
 
     items: [{
         xtype: 'form',
+        reference: 'form', // so that the controller know to target this form onButtonClickCancel in controller
         bodyPadding: 15,
         defaults: {
             xtype: 'textfield',
@@ -69,12 +72,18 @@ Ext.define('App.view.login.Login', {
             }, {
                 xtype: 'button',
                 iconCls: 'fa fa-times fa-lg',
-                text: 'Cancel'
+                text: 'Cancel',
+                listeners: {
+                    click: 'onButtonClickCancel'
+                }
             }, {
                 xtype: 'button',
                 formBind: true, // button will only be enabled if form has no error from the client validation
                 iconCls: 'fa fa-sig-in fa-lg',
-                text: 'Submit'
+                text: 'Submit',
+                listeners: {
+                    click: 'onButtonClickSubmit'
+                }
             }
 
             ]

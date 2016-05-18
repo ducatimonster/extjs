@@ -6,7 +6,7 @@
 Ext.define('App.Application', {
     extend: 'Ext.app.Application',
 
-    name: 'Packt',
+    name: 'App',
 
     views: [
         'login.Login'
@@ -38,13 +38,13 @@ Ext.define('App.Application', {
                 remove:true,
                 listeners: { // #1
                     afteranimate: function(el, startTime, eOpts ){//#2
-                        console.log('launch') // #3
+                        Ext.widget('login-dialog');
                     }
                 }
             });
         });
 
-        task.delay(2000);;
+        task.delay(2000);
 
     },
 

@@ -1,8 +1,10 @@
 $app-name:  dynamic( 'App' );
-$image-search-path: 'C:/xampp/htdocs/extjstutorial/build/development/App/resources';
+$image-search-path: 'C:/xampp/htdocs/extjs/extjstutorial/build/development/App/resources';
 $theme-name:  dynamic( 'theme-triton' );
 $include-app-application: dynamic(true);;
 $include-app-store-personnel: dynamic(true);;
+$include-app-view-login-login: dynamic(true);;
+$include-app-view-login-logincontroller: dynamic(true);;
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
 $include-ext-abstractmanager: dynamic(true);;
@@ -877,8 +879,6 @@ $include-ext-view-view: dynamic(true);;
 $include-ext-window-messagebox: dynamic(true);;
 $include-ext-window-toast: dynamic(true);;
 $include-ext-window-window: dynamic(true);;
-$include-packt-view-login-login: dynamic(true);;
-$include-packt-view-login-logincontroller: dynamic(true);;
 $include-packt-view-login-loginmodel: dynamic(true);;
 $output-paths: ("path": "../resources");
 

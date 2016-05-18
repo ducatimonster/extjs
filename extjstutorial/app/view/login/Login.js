@@ -1,12 +1,12 @@
 /**
  * Created by ma.l on 5/18/2016.
  */
-Ext.define('Packt.view.login.Login', {
+Ext.define('App.view.login.Login', {
     extend: 'Ext.window.Window',
 
     requires: [
         // 'Packt.view.Login.login.LoginModel',
-		'Packt.view.login.LoginController',
+        // 'App.view.login.LoginController',
         'Ext.form.Panel'
     ],
 
@@ -15,11 +15,11 @@ Ext.define('Packt.view.login.Login', {
     xtype: 'login',
     */
     xtype: 'login-dialog',
-    autoshow: true,
-    height: 170,
+    autoShow: true,
+    height: 200,
     width: 360,
     layout: {
-        type: 'fit'                    // #7
+        type: 'fit'
     },
     iconCls: 'fa fa-key fa-lg',        // #8
     title: 'Login',                    // #9
@@ -63,7 +63,7 @@ Ext.define('Packt.view.login.Login', {
     dockedItems: [
         {
             xtype: 'toolbar',
-            docked: 'bottom',
+            dock: 'bottom',
             items: [ {
                 xtype: 'tbfill'
             }, {
@@ -85,5 +85,3 @@ Ext.define('Packt.view.login.Login', {
     controller: 'login'
 
 });
-
-Ext.widget('login-dialog');

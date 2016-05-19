@@ -1,6 +1,12 @@
 /*
  * This is is imported by virtue of "sass.etc" in "app.json".
  */
+
+@import "fontAwesome/font-awesome";
+@import "flagIcons";
+@import "iconColors";
+
+
 .x-mask.splashscreen {
   background-color: white;
   opacity: 1;

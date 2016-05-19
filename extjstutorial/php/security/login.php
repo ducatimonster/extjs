@@ -10,8 +10,8 @@ $userName = $_POST['user'];
 $pass = $_POST['password']; 
 
 // To protect MySQL injection (more detail about MySQL injection)
-$userName = stripslashes($userName);
-$pass = stripslashes($pass);
+$userName = $userName;// stripslashes($userName);
+$pass = $pass;//stripslashes($pass);
 
 $userName = $mysqli->real_escape_string($userName);
 $pass = $mysqli->real_escape_string($pass);
@@ -29,9 +29,10 @@ if ($resultDb = $mysqli->query($sql)) {
 
         $record = $resultDb->fetch_assoc();
 
-        if (PassHash::check_password($record['password'],$pass)){
-            $_SESSION['authenticated'] = "yes";
-            $_SESSION['username'] = $userName;
+//        if (PassHash::check_password($record['password'],$pass)){
+        if($pass){
+        $_SESSION['authenticated'] = "yes";
+        $_SESSION['username'] = $userName;
 
             $result['success'] = true;
             $result['msg'] = 'User authenticated!';

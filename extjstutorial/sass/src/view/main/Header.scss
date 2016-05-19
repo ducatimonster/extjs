@@ -1,0 +1,18 @@
+$app-header-text-color: #2a3f5cd;
+
+.app-header-logo {
+  color: $app-header-text-color;
+}
+
+.app-header-title {
+  padding: 5px 0 5px 3px;
+  color: $app-header-text-color;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/*
+The app-header-logo was created to customize the color of the
+icon to be the same as the application title.
+We are using the Sass variable inside both styles.
+The text color of the title is a dark blue.*/

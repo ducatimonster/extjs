@@ -6,7 +6,8 @@ Ext.define('App.view.login.LoginController', {
     alias: 'controller.login',
     requires: [
         'App.view.login.CapsLockTooltip',
-        'App.util.Util'
+        'App.util.Util',
+        // 'App.util.SessionMonitor'
     ],
 
     // This is so user  can type ENTER to login
@@ -135,6 +136,7 @@ Ext.define('App.view.login.LoginController', {
         this.getView().unmask();
         this.getView().close();
         Ext.create('App.view.main.Main');
+        App.util.SessionMonitor.start();
 
     }
 

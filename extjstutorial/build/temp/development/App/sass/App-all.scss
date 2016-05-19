@@ -3,8 +3,14 @@ $image-search-path: 'C:/xampp/htdocs/extjs/extjstutorial/build/development/App/r
 $theme-name:  dynamic( 'theme-triton' );
 $include-app-application: dynamic(true);;
 $include-app-store-personnel: dynamic(true);;
+$include-app-view-locale-translation: dynamic(true);;
+$include-app-view-login-capslocktooltip: dynamic(true);;
 $include-app-view-login-login: dynamic(true);;
 $include-app-view-login-logincontroller: dynamic(true);;
+$include-app-view-main-footer: dynamic(true);;
+$include-app-view-main-header: dynamic(true);;
+$include-app-view-main-main: dynamic(true);;
+$include-app-view-main-panel: dynamic(true);;
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
 $include-ext-abstractmanager: dynamic(true);;
@@ -1328,3 +1334,13 @@ $relative-image-path-for-uis: $theme-triton-resource-path;
 @import '../../../../../ext/classic/theme-triton/sass/src/tab/Tab';
 @import '../../../../../ext/classic/theme-triton/sass/src/tree/View';
 @import '../../../../../ext/classic/theme-triton/sass/src/window/Toast';
+
+/* including package App */
+$App-resource-root: '' !default;
+$App-resource-path: 'images' !default;
+$current-package: false;
+$current-resource-root: $App-resource-root;
+$relative-image-path-for-uis: $App-resource-path;
+@import '../../../../../sass/src/view/main/Main';
+@import '../../../../../sass/src/view/main/Header';
+@import '../../../../../sass/src/view/main/Footer';

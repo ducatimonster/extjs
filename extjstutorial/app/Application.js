@@ -12,7 +12,8 @@ Ext.define('App.Application', {
     name: 'App',
 
     views: [
-        'login.Login'
+        'login.Login',
+        'main.Main'
     ],
 
     controllers: [],

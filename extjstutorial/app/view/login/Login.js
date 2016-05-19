@@ -7,7 +7,8 @@ Ext.define('App.view.login.Login', {
     requires: [
         // 'Packt.view.Login.login.LoginModel',
         'App.view.login.LoginController', // this let it know where to look for the controller alias 'login'
-        'Ext.form.Panel'
+        'Ext.form.Panel',
+        'App.view.locale.Translation'
     ],
 
     controller: 'login', // using the alias of LoginController.js
@@ -53,6 +54,7 @@ Ext.define('App.view.login.Login', {
         items: [{
             name: 'user',
             fieldLabel: 'User',
+            value: 'testing',
 
             // Validations
             maxlength: 25
@@ -61,6 +63,7 @@ Ext.define('App.view.login.Login', {
             inputType: 'password',
             name: 'password',
             fieldLabel: 'Password',
+            value: 'Testing1$',
 
             //Validations
             vtype: 'customPass',
@@ -81,6 +84,8 @@ Ext.define('App.view.login.Login', {
             dock: 'bottom',
             items: [ {
                 xtype: 'tbfill'
+            }, {
+                xtype: 'translation'
             }, {
                 xtype: 'button',
                 iconCls: 'fa fa-times fa-lg',

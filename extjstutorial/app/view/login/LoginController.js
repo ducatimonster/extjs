@@ -4,7 +4,9 @@
 Ext.define('App.view.login.LoginController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.login',
-
+    requires: [
+        'App.util.Util'
+    ],
     onTextFieldSpecialKey: function(field, e, options) {},
 
     onTextFieldKeyPress: function(field, e, options) {},
@@ -35,7 +37,7 @@ Ext.define('App.view.login.LoginController', {
         });
     },
 
-    onLoginFailure: function(form, action) {
+/*    onLoginFailure: function(form, action) {
         var result = Ext.JSON.decode(action.response.responseText, true);
 
         if (!result) {
@@ -72,6 +74,23 @@ Ext.define('App.view.login.LoginController', {
                 });
 
 
+        }
+    },*/
+
+
+    onLoginFailure: function(form, action) {
+        
+        var result = App.util.Util.decodeJSON(action.response.responseText);
+
+        switch(action.failureType) {
+            case Ext.form.action.Action.CLIENT_INVALID:
+                App.util.Util.showErrorMsg('Form fields may not be submited with invalid values');
+                break;
+            case Ext.form.action.Action.CONNECT_FAILURE:
+                App.util.Util.showErrorMsg(action.response.responseText);
+                break;
+            case Ext.form.action.Action.SERVER_INVALID:
+                App.util.Util.showErrorMsg(result.msg);
         }
     },
 

@@ -5,11 +5,43 @@ Ext.define('App.view.login.LoginController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.login',
     requires: [
+        'App.view.login.CapsLockTooltip',
         'App.util.Util'
     ],
-    onTextFieldSpecialKey: function(field, e, options) {},
 
-    onTextFieldKeyPress: function(field, e, options) {},
+    // This is so user  can type ENTER to login
+    onTextFieldSpecialKey: function(field, e, options) {
+        if (e.getKey() === e.ENTER) {
+            this.doLogin();
+        }
+    },
+
+
+    onTextFieldKeyPress: function(field, e, options) {
+
+        // Get the ASCII code the user pressed
+        var charCode = e.getCharCode(),
+            me = this;
+
+        // Check if CAPS is on
+        if((e.shiftKey && charCode >= 97 && charCode <= 122) || // Verify if Shift + small alphabet ASCII code is pressed
+            (!e.shiftKey && charCode >= 65 && charCode <= 90)) { // Verify if Shift NOT pressed + capital alphabet ASCII code is pressed
+
+            //verify that there is reference of CapLockToolTip class already existing
+            if (me.capslockTooltip === undefined) {
+                // creates instance if it doesn't exist yet and store it in variable 'capslockTooltip'
+                me.capslockTooltip = Ext.widget('capslocktooltip');
+            }
+            me.capslockTooltip.show();
+
+
+        } else {
+
+            if (me.capslockTooltip !== undefined ) { // If Caps Lock is NOT active, verify that there is reference to the CapsLockTooltip class
+                me.capslockTooltip.hide(); // If it already exists, the hide the tooltip because Caps Lock is not active
+            }
+        }
+    },
 
     onButtonClickCancel: function(button, e, options) {
         // console.log('login cancel')
@@ -35,8 +67,12 @@ Ext.define('App.view.login.LoginController', {
             success: 'onLoginSuccess',
             failure: 'onLoginFailure'
         });
+
+        // adds mask while server sends response so they can't keep clicking on button to make things slower
+        this.getView().mask('Authenicating...Please wait...');
     },
 
+    // Login Failure the longer version without using the Util class
 /*    onLoginFailure: function(form, action) {
         var result = Ext.JSON.decode(action.response.responseText, true);
 
@@ -79,7 +115,8 @@ Ext.define('App.view.login.LoginController', {
 
 
     onLoginFailure: function(form, action) {
-        
+        this.getView().unmask();
+
         var result = App.util.Util.decodeJSON(action.response.responseText);
 
         switch(action.failureType) {
@@ -95,9 +132,13 @@ Ext.define('App.view.login.LoginController', {
     },
 
     onLoginSuccess: function(form, action) {
+        this.getView().unmask();
         this.getView().close();
         Ext.create('App.view.main.Main');
+
     }
+
+
 
     /**
      * Called when the view is created

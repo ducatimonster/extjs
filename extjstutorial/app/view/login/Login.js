@@ -43,7 +43,12 @@ Ext.define('App.view.login.Login', {
             allowBlank: false,
             vtype: 'alphanum',
             minLength: 3,
-            msgTarget: 'under' // OPTIONS: side, under, title, none
+            msgTarget: 'under', // OPTIONS: side, under, title, none
+
+            // Listens for the when user types ENTER key
+            listeners: {
+                specialKey: 'onTextFieldSpecialKey'
+            }
         },
         items: [{
             name: 'user',
@@ -59,7 +64,14 @@ Ext.define('App.view.login.Login', {
 
             //Validations
             vtype: 'customPass',
-            msgTarget: 'side'
+            msgTarget: 'side',
+            
+            //listens for the CAPSLOCK key press for the password field
+            id: 'password',
+            enableKeyEvents: true,
+            listeners: {
+                keypress: 'onTextFieldKeyPress'
+            }
         }]
     }],
 

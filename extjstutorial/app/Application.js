@@ -3,6 +3,9 @@
  * calls Ext.application(). This is the ideal place to handle application launch and
  * initialization details.
  */
+
+
+
 Ext.define('App.Application', {
     extend: 'Ext.app.Application',
 
@@ -22,6 +25,10 @@ Ext.define('App.Application', {
      otherwise, the loading message will be there indefinitely!*/
 
     launch: function () {
+
+        // Without this the tool tip will not work in application
+        Ext.tip.QuickTipManager.init();
+
         var me = this;
 
         var task = new Ext.util.DelayedTask(function() {
